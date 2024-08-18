@@ -142,7 +142,7 @@
 
     - name: Remove upgrades
       shell:
-        cmd: yum list installed|grep @updates|awk '{print $1}'|xargs yum -y downgrade --disablerepo="updates"
+        cmd: yum list installed|awk '/@updates/{print $1}'|xargs yum -y downgrade --disablerepo="updates"
       when: cvp_version not in legacy_cvps and cloud_provider == "gcp"
 
     - name: Setup python
